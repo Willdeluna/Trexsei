@@ -1,0 +1,915 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="theme-color" content="#5A2A43">
+<title>Ginhawa — for Trexsei 🌸</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --petal:#FCF4EF;
+  --card:#FFFFFF;
+  --tint:#F6E4DA;
+  --plum:#5A2A43;
+  --plum-soft:#8A5C72;
+  --guava:#E07856;
+  --guava-deep:#C85F40;
+  --leaf:#6F8A6A;
+  --leaf-soft:#E4ECDF;
+  --gold:#E0A93B;
+  --ink:#3A2730;
+  --muted:#9A8590;
+  --line:#EFDED5;
+  --shadow:0 6px 24px rgba(90,42,67,.08);
+  --shadow-soft:0 2px 10px rgba(90,42,67,.06);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  background:var(--petal);
+  color:var(--ink);
+  line-height:1.55;
+  font-size:16px;
+  -webkit-font-smoothing:antialiased;
+  padding-bottom:84px;
+}
+.serif{font-family:"Fraunces",Georgia,serif;}
+h1,h2,h3{font-family:"Fraunces",Georgia,serif;font-weight:500;color:var(--plum);margin:0;line-height:1.2;}
+
+/* ---------- Header ---------- */
+header{
+  position:sticky;top:0;z-index:20;
+  background:linear-gradient(160deg,#6A3350,#5A2A43);
+  color:#fff;
+  padding:18px 20px 16px;
+  border-radius:0 0 22px 22px;
+  box-shadow:var(--shadow);
+}
+.brand{display:flex;align-items:center;gap:10px;}
+.bloom{width:26px;height:26px;flex:0 0 auto;}
+header h1{color:#fff;font-size:1.45rem;letter-spacing:.5px;}
+.tagline{font-size:.78rem;color:#EBD4DF;margin-top:2px;letter-spacing:.3px;}
+
+/* ---------- Layout ---------- */
+main{max-width:560px;margin:0 auto;padding:18px 16px 8px;}
+.view{display:none;animation:fade .35s ease;}
+.view.active{display:block;}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+
+.card{
+  background:var(--card);
+  border-radius:18px;
+  padding:18px;
+  box-shadow:var(--shadow-soft);
+  margin-bottom:14px;
+  border:1px solid var(--line);
+}
+.card.tinted{background:var(--tint);border-color:#EBCFC1;}
+.card.leaf{background:var(--leaf-soft);border-color:#D6E2CF;}
+.eyebrow{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;color:var(--guava-deep);font-weight:700;margin-bottom:6px;}
+.eyebrow.green{color:var(--leaf);}
+h2{font-size:1.35rem;margin-bottom:4px;}
+h3{font-size:1.05rem;margin:0 0 6px;}
+p{margin:0 0 10px;}
+p:last-child{margin-bottom:0;}
+.lead{color:var(--plum-soft);}
+.muted{color:var(--muted);font-size:.86rem;}
+
+/* ---------- Today ---------- */
+.greet{font-size:1.7rem;margin-bottom:2px;}
+.datelbl{color:var(--muted);font-size:.85rem;margin-bottom:14px;}
+
+.chips{display:flex;flex-wrap:wrap;gap:8px;}
+.chip{
+  border:1.5px solid var(--line);
+  background:#fff;border-radius:999px;
+  padding:8px 14px;font-size:.9rem;cursor:pointer;
+  color:var(--ink);font-family:inherit;transition:.18s;
+}
+.chip:active{transform:scale(.96);}
+.chip.sel{background:var(--plum);color:#fff;border-color:var(--plum);}
+.chip.sel.guava{background:var(--guava);border-color:var(--guava);}
+.field-lbl{font-size:.82rem;font-weight:600;color:var(--plum);margin:14px 0 8px;}
+.field-lbl:first-child{margin-top:0;}
+
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  background:var(--guava);color:#fff;border:none;border-radius:14px;
+  padding:14px 18px;font-size:1rem;font-weight:600;font-family:inherit;
+  cursor:pointer;width:100%;transition:.18s;
+}
+.btn:active{transform:scale(.98);background:var(--guava-deep);}
+.btn.ghost{background:transparent;color:var(--plum);border:1.5px solid var(--line);}
+.btn.sm{width:auto;padding:9px 14px;font-size:.85rem;border-radius:10px;}
+
+.saved-note{font-size:.85rem;color:var(--leaf);font-weight:600;height:18px;margin-top:8px;text-align:center;}
+
+/* goals */
+.goal{display:flex;align-items:center;gap:12px;padding:12px 4px;border-bottom:1px solid var(--line);cursor:pointer;}
+.goal:last-child{border-bottom:none;}
+.goal .box{width:24px;height:24px;border-radius:8px;border:2px solid #D9C3CC;flex:0 0 auto;display:flex;align-items:center;justify-content:center;transition:.15s;}
+.goal.done .box{background:var(--leaf);border-color:var(--leaf);}
+.goal.done .box svg{opacity:1;}
+.goal .box svg{opacity:0;}
+.goal.done .gtxt{color:var(--muted);text-decoration:line-through;}
+.gtxt{font-size:.95rem;}
+
+/* ---------- Garden (hope + accountability) ---------- */
+.garden{background:linear-gradient(170deg,#EAF1E4,#F7EADF);border-color:#DDE7D4;text-align:center;}
+.plant{height:150px;display:flex;align-items:flex-end;justify-content:center;}
+.plant svg{height:148px;width:auto;}
+.plant-label{font-family:"Fraunces",Georgia,serif;color:var(--leaf);font-size:.95rem;margin-top:2px;}
+.streak-row{display:flex;justify-content:center;gap:12px;margin:14px 0 2px;}
+.stat{background:#fff;border:1px solid var(--line);border-radius:14px;padding:10px 18px;min-width:104px;box-shadow:var(--shadow-soft);}
+.stat-num{display:block;font-family:"Fraunces",Georgia,serif;font-size:1.8rem;color:var(--guava);line-height:1;}
+.stat-lbl{font-size:.7rem;color:var(--muted);letter-spacing:.05em;}
+.streak-msg{font-size:.84rem;color:var(--leaf);font-weight:600;margin-top:10px;}
+.garden-note{font-size:1.02rem;color:var(--plum);margin:12px 0 0;}
+
+/* ---------- For You card ---------- */
+.foryou{background:linear-gradient(160deg,#FFF3EC,#FCE6D8);border-color:#F2D3C2;}
+.foryou h3{color:var(--guava-deep);margin:2px 0 8px;font-size:1.18rem;}
+
+/* ---------- Lists / food ---------- */
+.foodgroup{margin-bottom:6px;}
+.foodgroup h3{display:flex;align-items:center;gap:8px;}
+.dot{width:10px;height:10px;border-radius:50%;flex:0 0 auto;}
+.tags{display:flex;flex-wrap:wrap;gap:7px;margin-top:8px;}
+.tag{background:var(--petal);border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-size:.84rem;}
+.tag b{color:var(--plum);font-weight:600;}
+.swap{display:flex;align-items:center;gap:8px;padding:9px 0;border-bottom:1px dashed var(--line);font-size:.92rem;}
+.swap:last-child{border-bottom:none;}
+.swap .from{color:var(--muted);}
+.swap .arrow{color:var(--guava);flex:0 0 auto;}
+.swap .to{color:var(--plum);font-weight:600;}
+.meal{padding:11px 0;border-bottom:1px solid var(--line);}
+.meal:last-child{border-bottom:none;}
+.meal b{color:var(--plum);}
+.meal .m-desc{font-size:.88rem;color:var(--plum-soft);}
+
+ul.clean{margin:6px 0 0;padding-left:0;list-style:none;}
+ul.clean li{position:relative;padding:7px 0 7px 24px;font-size:.94rem;border-bottom:1px solid var(--line);}
+ul.clean li:last-child{border-bottom:none;}
+ul.clean li::before{content:"";position:absolute;left:4px;top:15px;width:7px;height:7px;border-radius:50%;background:var(--guava);}
+ul.clean.green li::before{background:var(--leaf);}
+
+/* ---------- Move ---------- */
+.move-item{display:flex;gap:14px;padding:13px 0;border-bottom:1px solid var(--line);}
+.move-item:last-child{border-bottom:none;}
+.move-num{font-family:"Fraunces",serif;font-size:1.3rem;color:var(--guava);font-weight:600;flex:0 0 28px;}
+.move-item b{color:var(--plum);}
+.move-item .m-sub{font-size:.86rem;color:var(--plum-soft);}
+
+/* ---------- Ease / breathing ---------- */
+.breath-wrap{display:flex;flex-direction:column;align-items:center;padding:10px 0 4px;}
+.breath-stage{
+  width:170px;height:170px;border-radius:50%;
+  background:radial-gradient(circle at 50% 40%,#F4B79F,#E07856);
+  display:flex;align-items:center;justify-content:center;
+  box-shadow:0 0 0 0 rgba(224,120,86,.35);
+  transition:transform 4s ease-in-out;
+  transform:scale(.6);
+  margin:6px 0 18px;
+}
+.breath-stage.in{transform:scale(1);transition:transform 4s ease-in-out;}
+.breath-stage.hold{transition:transform 1.5s ease-in-out;}
+.breath-stage.out{transform:scale(.6);transition:transform 6s ease-in-out;}
+.breath-stage span{color:#fff;font-family:"Fraunces",serif;font-size:1.25rem;letter-spacing:.5px;}
+.breath-count{font-size:.9rem;color:var(--muted);margin-bottom:14px;height:20px;}
+
+/* ---------- Track ---------- */
+.entry{background:#fff;border:1px solid var(--line);border-radius:14px;padding:13px 14px;margin-bottom:10px;box-shadow:var(--shadow-soft);}
+.entry .e-date{font-weight:600;color:var(--plum);font-size:.92rem;}
+.entry .e-row{display:flex;flex-wrap:wrap;gap:6px;margin-top:7px;}
+.pill{font-size:.76rem;padding:3px 9px;border-radius:999px;background:var(--petal);border:1px solid var(--line);color:var(--plum-soft);}
+.pill.period{background:#FBE2E6;border-color:#F4C5CD;color:#B5435A;}
+.pill.cramp{background:#FCEBD6;border-color:#F1D29A;color:#A9772A;}
+.entry .e-note{font-size:.88rem;color:var(--ink);margin-top:8px;}
+.del{float:right;color:var(--muted);background:none;border:none;font-size:.8rem;cursor:pointer;text-decoration:underline;}
+.empty{text-align:center;color:var(--muted);padding:26px 10px;font-size:.92rem;}
+
+textarea,input[type=text]{
+  width:100%;border:1.5px solid var(--line);border-radius:12px;
+  padding:11px 13px;font-family:inherit;font-size:.95rem;color:var(--ink);
+  background:#fff;resize:vertical;
+}
+textarea:focus,input:focus{outline:none;border-color:var(--guava);}
+
+/* ---------- Safety card ---------- */
+.safety{background:#FFF7F0;border:1px solid #F4D9C6;border-left:4px solid var(--guava);border-radius:14px;padding:15px;}
+.safety h3{color:var(--guava-deep);}
+.warn{background:#FDECEA;border:1px solid #F6C9C2;border-left:4px solid #D6453B;border-radius:14px;padding:15px;}
+.warn h3{color:#C13B30;}
+.warn ul.clean li::before{background:#D6453B;}
+
+/* ---------- Bottom nav ---------- */
+nav{
+  position:fixed;bottom:0;left:0;right:0;z-index:30;
+  background:rgba(255,255,255,.96);
+  backdrop-filter:blur(8px);
+  border-top:1px solid var(--line);
+  display:flex;max-width:560px;margin:0 auto;
+  padding:6px 4px calc(6px + env(safe-area-inset-bottom));
+}
+.tab{
+  flex:1;background:none;border:none;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:3px;
+  padding:6px 2px;color:var(--muted);font-family:inherit;font-size:.66rem;font-weight:600;
+  letter-spacing:.02em;
+}
+.tab svg{width:24px;height:24px;}
+.tab.active{color:var(--plum);}
+.tab.active svg{stroke:var(--guava);}
+
+/* settings link */
+.set-link{background:none;border:none;color:#EBD4DF;font-family:inherit;font-size:.8rem;cursor:pointer;text-decoration:underline;padding:0;}
+.modal{position:fixed;inset:0;background:rgba(58,39,48,.5);z-index:50;display:none;align-items:flex-end;justify-content:center;}
+.modal.show{display:flex;}
+.sheet{background:var(--petal);width:100%;max-width:560px;border-radius:22px 22px 0 0;padding:24px 20px calc(24px + env(safe-area-inset-bottom));animation:up .3s ease;}
+@keyframes up{from{transform:translateY(100%)}to{transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;}
+  .breath-stage{transition:none!important;transform:scale(.85)!important;}
+}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="brand">
+    <svg class="bloom" viewBox="0 0 24 24" fill="none">
+      <path d="M12 2c1.6 1.8 1.6 4.2 0 6-1.6-1.8-1.6-4.2 0-6Z" fill="#F4B79F"/>
+      <path d="M22 12c-1.8 1.6-4.2 1.6-6 0 1.8-1.6 4.2-1.6 6 0Z" fill="#E07856"/>
+      <path d="M12 22c-1.6-1.8-1.6-4.2 0-6 1.6 1.8 1.6 4.2 0 6Z" fill="#F4B79F"/>
+      <path d="M2 12c1.8-1.6 4.2-1.6 6 0-1.8 1.6-4.2 1.6-6 0Z" fill="#E07856"/>
+      <circle cx="12" cy="12" r="2.6" fill="#E0A93B"/>
+    </svg>
+    <div>
+      <h1>Ginhawa</h1>
+      <div class="tagline">for Trexsei 🌸 · <button class="set-link" onclick="openSettings()">edit name</button></div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ============ TODAY ============ -->
+<section class="view active" id="today">
+  <h2 class="serif greet" id="greet">Maayong adlaw 🌸</h2>
+  <div class="datelbl" id="dateLbl"></div>
+
+  <div class="card garden">
+    <div class="plant" id="plant"></div>
+    <div class="plant-label" id="plantLabel"></div>
+    <div class="streak-row">
+      <div class="stat"><span class="stat-num" id="streakNum">0</span><span class="stat-lbl">day streak</span></div>
+      <div class="stat"><span class="stat-num" id="totalNum">0</span><span class="stat-lbl">days of care</span></div>
+    </div>
+    <div class="streak-msg" id="streakMsg"></div>
+    <p class="serif garden-note" id="note"></p>
+  </div>
+
+  <div class="card tinted">
+    <div class="eyebrow">How are you today?</div>
+    <div class="field-lbl">Cramps</div>
+    <div class="chips" id="cramps">
+      <button class="chip guava" data-v="None">None</button>
+      <button class="chip guava" data-v="Mild">Mild</button>
+      <button class="chip guava" data-v="Bad">Bad</button>
+      <button class="chip guava" data-v="Severe">Severe</button>
+    </div>
+    <div class="field-lbl">Energy</div>
+    <div class="chips" id="energy">
+      <button class="chip" data-v="Low">Low</button>
+      <button class="chip" data-v="Okay">Okay</button>
+      <button class="chip" data-v="Good">Good</button>
+    </div>
+    <div class="field-lbl">Mood</div>
+    <div class="chips" id="mood">
+      <button class="chip" data-v="🙂 Light">🙂 Light</button>
+      <button class="chip" data-v="😐 Meh">😐 Meh</button>
+      <button class="chip" data-v="😢 Heavy">😢 Heavy</button>
+      <button class="chip" data-v="😣 Sore">😣 Sore</button>
+    </div>
+    <div style="height:14px"></div>
+    <button class="btn" onclick="saveCheckin()">Save today's check-in</button>
+    <div class="saved-note" id="checkSaved"></div>
+  </div>
+
+  <div class="card foryou" id="forYouCard">
+    <div class="eyebrow">For you today</div>
+    <h3 class="serif" id="fyTitle"></h3>
+    <p id="fyBody" style="margin-bottom:0"></p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow green">Gentle goals for today</div>
+    <div id="goals"></div>
+  </div>
+
+  <div class="safety">
+    <h3 class="serif">For your safety 💛</h3>
+    <p class="muted" style="margin-bottom:0">This app is here to support you gently — it is not a doctor. Because you have PCOS <b>and</b> blood clots, please keep working with a real doctor. Some PCOS treatments and some painkillers aren't safe for people who've had clots, so let your doctor choose what's right for you. See the <b>Move</b> and <b>Ease</b> tabs for warning signs to never ignore.</p>
+  </div>
+</section>
+
+<!-- ============ EAT ============ -->
+<section class="view" id="eat">
+  <h2 class="serif">Eat to feel good</h2>
+  <p class="lead">PCOS gets calmer when your blood sugar is steady. The trick is simple and cheap: at every meal, pair <b>protein + vegetables + a little smart carb</b>. Never eat rice or sweets all alone.</p>
+
+  <div class="card">
+    <div class="eyebrow">The simple rule</div>
+    <ul class="clean">
+      <li>Add <b>protein</b> (egg, fish, monggo, tokwa) to every meal — it keeps you full and steadies sugar.</li>
+      <li>Fill half your plate with <b>gulay</b> (vegetables). They're cheap and powerful.</li>
+      <li>Keep rice portions smaller, and choose <b>brown/red rice or kamote</b> when you can.</li>
+      <li>Cut <b>sweet drinks</b> first — softdrinks, 3-in-1 coffee, sweet juice. This helps PCOS and weight the most.</li>
+      <li>Drink water through the day. Calamansi in water is a free, lovely swap.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow green">Affordable, local & good for you</div>
+
+    <div class="foodgroup">
+      <h3><span class="dot" style="background:var(--guava)"></span>Cheap proteins</h3>
+      <div class="tags">
+        <span class="tag"><b>Itlog</b> eggs</span>
+        <span class="tag"><b>Monggo</b> mung beans</span>
+        <span class="tag"><b>Galunggong</b> & small fish</span>
+        <span class="tag"><b>Tokwa</b> tofu</span>
+        <span class="tag"><b>Manok</b> chicken</span>
+        <span class="tag"><b>Sardinas</b></span>
+      </div>
+    </div>
+
+    <div class="foodgroup" style="margin-top:14px">
+      <h3><span class="dot" style="background:var(--gold)"></span>Smart carbs (smaller portions)</h3>
+      <div class="tags">
+        <span class="tag"><b>Brown / red rice</b></span>
+        <span class="tag"><b>Kamote</b></span>
+        <span class="tag"><b>Saba</b> banana</span>
+        <span class="tag"><b>Oats</b></span>
+        <span class="tag"><b>Mais</b> corn</span>
+      </div>
+    </div>
+
+    <div class="foodgroup" style="margin-top:14px">
+      <h3><span class="dot" style="background:var(--leaf)"></span>Cheap power vegetables</h3>
+      <div class="tags">
+        <span class="tag"><b>Malunggay</b></span>
+        <span class="tag"><b>Kangkong</b></span>
+        <span class="tag"><b>Pechay</b></span>
+        <span class="tag"><b>Talong</b></span>
+        <span class="tag"><b>Ampalaya</b></span>
+        <span class="tag"><b>Sitaw</b></span>
+        <span class="tag"><b>Okra</b></span>
+        <span class="tag"><b>Kalabasa</b></span>
+        <span class="tag"><b>Sayote</b></span>
+      </div>
+    </div>
+
+    <div class="foodgroup" style="margin-top:14px">
+      <h3><span class="dot" style="background:#C85F8E"></span>Fruit (whole, not juice)</h3>
+      <div class="tags">
+        <span class="tag"><b>Papaya</b></span>
+        <span class="tag"><b>Bayabas</b> guava</span>
+        <span class="tag"><b>Pinya</b> pineapple</span>
+        <span class="tag"><b>Calamansi</b></span>
+        <span class="tag"><b>Mangga</b> (small amount)</span>
+      </div>
+    </div>
+
+    <div class="foodgroup" style="margin-top:14px">
+      <h3><span class="dot" style="background:var(--plum)"></span>Calming & anti-inflammatory</h3>
+      <div class="tags">
+        <span class="tag"><b>Luya</b> ginger</span>
+        <span class="tag"><b>Luyang dilaw</b> turmeric</span>
+        <span class="tag"><b>Bawang</b> garlic</span>
+        <span class="tag"><b>Cinnamon</b></span>
+      </div>
+    </div>
+  </div>
+
+  <div class="card tinted">
+    <div class="eyebrow">Easy, cheaper swaps</div>
+    <div class="swap"><span class="from">Big bowl of white rice</span><span class="arrow">→</span><span class="to">Smaller rice + extra gulay & egg</span></div>
+    <div class="swap"><span class="from">Softdrink / sweet juice</span><span class="arrow">→</span><span class="to">Water or calamansi water</span></div>
+    <div class="swap"><span class="from">Instant noodles alone</span><span class="arrow">→</span><span class="to">Monggo guisado w/ malunggay</span></div>
+    <div class="swap"><span class="from">3-in-1 sweet coffee</span><span class="arrow">→</span><span class="to">Black coffee or less sugar</span></div>
+    <div class="swap"><span class="from">Pandesal + jam</span><span class="arrow">→</span><span class="to">Pandesal + egg, or oats + banana</span></div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow green">Cheap meals that fit</div>
+    <div class="meal"><b>Ginisang monggo</b> with malunggay & a bit of fish<div class="m-desc">Protein + iron + fiber. Filling and very cheap.</div></div>
+    <div class="meal"><b>Tortang talong</b> with egg + tomato on the side<div class="m-desc">Eggplant is rich in fiber; egg adds protein.</div></div>
+    <div class="meal"><b>Ginisang ampalaya</b> with egg<div class="m-desc">Ampalaya may help blood sugar — great for PCOS.</div></div>
+    <div class="meal"><b>Tinolang manok</b> with malunggay & sayote<div class="m-desc">Warm, light, lots of vegetables.</div></div>
+    <div class="meal"><b>Oats + saba + a little peanut</b><div class="m-desc">Steady-energy breakfast, no sugar crash.</div></div>
+  </div>
+</section>
+
+<!-- ============ MOVE ============ -->
+<section class="view" id="move">
+  <h2 class="serif">Move, gently</h2>
+
+  <div class="warn">
+    <h3 class="serif">Read first — because of the blood clots</h3>
+    <p style="margin-bottom:8px">Gentle, regular movement is usually <b>good</b> for circulation. But because you've had blood clots, please <b>ask your doctor before starting</b> any new exercise, and start slow.</p>
+    <p style="margin-bottom:0;font-weight:600;color:#C13B30">Stop and get medical help right away if you notice:</p>
+    <ul class="clean">
+      <li>Pain, swelling, warmth or redness in one leg (especially the calf)</li>
+      <li>Sudden shortness of breath or chest pain</li>
+      <li>Coughing up blood, or a fast heartbeat with dizziness</li>
+    </ul>
+  </div>
+
+  <div class="card leaf">
+    <div class="eyebrow green">The mindset</div>
+    <p style="margin-bottom:0">Forget hard workouts and the gym. You don't need any equipment or money. <b>Consistency beats intensity.</b> A short daily walk does more for PCOS, weight and clots than one tiring session a week.</p>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow green">Start here — walking</div>
+    <p>Walking keeps your blood moving (good for clots), helps insulin (good for PCOS), and lifts your mood.</p>
+    <ul class="clean green">
+      <li>Begin with <b>10 minutes</b> a day, around the barangay or in place at home.</li>
+      <li>Build slowly toward <b>20–30 minutes</b>, most days.</li>
+      <li>If you sit a long time, stand and walk a little every hour — important for clots.</li>
+    </ul>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow green">Gentle home routine · no equipment</div>
+    <p class="muted">Do what feels okay. Rest whenever you need. Skip anything that hurts.</p>
+    <div class="move-item"><div class="move-num">1</div><div><b>Marching in place</b> — 2 minutes<div class="m-sub">Warm up, get the blood flowing.</div></div></div>
+    <div class="move-item"><div class="move-num">2</div><div><b>Chair squats</b> — 8–10 times<div class="m-sub">Sit down to a chair and stand back up, slowly.</div></div></div>
+    <div class="move-item"><div class="move-num">3</div><div><b>Wall push-ups</b> — 8–10 times<div class="m-sub">Hands on the wall, bend and push gently.</div></div></div>
+    <div class="move-item"><div class="move-num">4</div><div><b>Glute bridges</b> — 10 times<div class="m-sub">Lie down, lift hips, lower slowly.</div></div></div>
+    <div class="move-item"><div class="move-num">5</div><div><b>Standing calf raises</b> — 12 times<div class="m-sub">Up on toes, down. Also helps leg circulation.</div></div></div>
+    <div class="move-item"><div class="move-num">6</div><div><b>Slow stretch & breathe</b> — 3 minutes<div class="m-sub">Reach up, side to side, then rest.</div></div></div>
+  </div>
+
+  <div class="card tinted">
+    <div class="eyebrow">When cramps hit</div>
+    <p style="margin-bottom:0">On heavy-cramp days, skip the routine. A slow walk and the gentle stretches in the <b>Ease</b> tab are plenty. Be kind to yourself.</p>
+  </div>
+</section>
+
+<!-- ============ EASE ============ -->
+<section class="view" id="ease">
+  <h2 class="serif">Ease the cramps</h2>
+  <p class="lead">For the hard moments. Breathe with this, warm up, and let it pass. You're okay.</p>
+
+  <div class="card tinted">
+    <div class="eyebrow">Breathe with me</div>
+    <p class="muted" style="text-align:center">Calm breathing relaxes the muscles that cramp. Follow the circle.</p>
+    <div class="breath-wrap">
+      <div class="breath-stage" id="breathStage"><span id="breathTxt">Ready</span></div>
+      <div class="breath-count" id="breathCount"></div>
+      <button class="btn sm" id="breathBtn" onclick="toggleBreath()" style="width:60%">Start</button>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow">What helps right now</div>
+    <ul class="clean">
+      <li><b>Warmth.</b> A warm compress, water bottle, or a towel soaked in hot water on your lower belly or back.</li>
+      <li><b>Warm ginger tea.</b> Boil sliced luya in water. Soothing and free.</li>
+      <li><b>Gentle stretches</b> (below) and slow walking ease the tightness.</li>
+      <li><b>Hydrate & rest.</b> Drink water, lie on your side with knees up.</li>
+    </ul>
+  </div>
+
+  <div class="card leaf">
+    <div class="eyebrow green">Gentle stretches for cramps</div>
+    <div class="move-item"><div class="move-num">1</div><div><b>Child's pose</b><div class="m-sub">Kneel, fold forward, rest your forehead down. Breathe.</div></div></div>
+    <div class="move-item"><div class="move-num">2</div><div><b>Knees to chest</b><div class="m-sub">Lie on your back, hug both knees in gently.</div></div></div>
+    <div class="move-item"><div class="move-num">3</div><div><b>Cat–cow</b><div class="m-sub">On hands and knees, arch and round your back slowly.</div></div></div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow green">Foods that ease cramps</div>
+    <p class="muted">Magnesium and iron help. Cheap sources:</p>
+    <div class="tags">
+      <span class="tag">Malunggay</span><span class="tag">Monggo</span><span class="tag">Saba banana</span>
+      <span class="tag">Dark leafy gulay</span><span class="tag">Mani (peanuts)</span><span class="tag">Ginger tea</span>
+    </div>
+  </div>
+
+  <div class="warn">
+    <h3 class="serif">About painkillers — please be careful</h3>
+    <p style="margin-bottom:0">Because of your blood clots, <b>don't just grab any painkiller.</b> Some pain medicines aren't safe with clots or with blood thinners. Ask your <b>doctor or pharmacist</b> which pain reliever is safe for you. And see a doctor if your cramps are very severe, getting worse, or stopping you from daily life — that's worth checking, especially with PCOS.</p>
+  </div>
+</section>
+
+<!-- ============ TRACK ============ -->
+<section class="view" id="track">
+  <h2 class="serif">Track how you feel</h2>
+  <p class="lead">PCOS cycles can be irregular, so a simple log helps you and your doctor see patterns. Just a few taps.</p>
+
+  <div class="card">
+    <div class="eyebrow">Add an entry</div>
+    <div class="field-lbl">Period today?</div>
+    <div class="chips" id="tPeriod">
+      <button class="chip" data-v="">No</button>
+      <button class="chip" data-v="Period started">Started today</button>
+      <button class="chip" data-v="On period">On period</button>
+    </div>
+    <div class="field-lbl">Cramps</div>
+    <div class="chips" id="tCramps">
+      <button class="chip guava" data-v="No cramps">None</button>
+      <button class="chip guava" data-v="Mild cramps">Mild</button>
+      <button class="chip guava" data-v="Bad cramps">Bad</button>
+      <button class="chip guava" data-v="Severe cramps">Severe</button>
+    </div>
+    <div class="field-lbl">Other symptoms</div>
+    <div class="chips" id="tSymp">
+      <button class="chip" data-v="Bloating">Bloating</button>
+      <button class="chip" data-v="Headache">Headache</button>
+      <button class="chip" data-v="Tired">Tired</button>
+      <button class="chip" data-v="Mood swings">Mood swings</button>
+      <button class="chip" data-v="Acne">Acne</button>
+      <button class="chip" data-v="Cravings">Cravings</button>
+    </div>
+    <div class="field-lbl">Note (optional)</div>
+    <textarea id="tNote" rows="2" placeholder="Anything you want to remember..."></textarea>
+    <div style="height:14px"></div>
+    <button class="btn" onclick="saveEntry()">Save entry</button>
+    <div class="saved-note" id="trackSaved"></div>
+  </div>
+
+  <div class="card">
+    <div class="eyebrow green">Your history</div>
+    <div id="history"></div>
+  </div>
+</section>
+
+</main>
+
+<!-- ============ NAV ============ -->
+<nav>
+  <button class="tab active" data-view="today" onclick="go('today',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9.5 12 3l9 6.5"/><path d="M5 9.5V20h14V9.5"/><path d="M9 20v-6h6v6"/></svg>
+    Today
+  </button>
+  <button class="tab" data-view="eat" onclick="go('eat',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3v8a2 2 0 0 0 2 2v8"/><path d="M5 7h4M9 3v8a2 2 0 0 1-2 2"/><path d="M17 3c-1.5 0-3 2-3 5s1.5 4 3 4v8"/></svg>
+    Eat
+  </button>
+  <button class="tab" data-view="move" onclick="go('move',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="13" cy="4.5" r="1.6"/><path d="m6 9 4-2 3 2 2 3M10 7l-1 5 3 2 1 5M9 12l-3 1"/></svg>
+    Move
+  </button>
+  <button class="tab" data-view="ease" onclick="go('ease',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-4.5-9.5-9C1 9 2.5 5.5 6 5.5c2 0 3 1.2 4 2.5 1-1.3 2-2.5 4-2.5 3.5 0 5 3.5 3.5 6.5C19 16.5 12 21 12 21Z"/></svg>
+    Ease
+  </button>
+  <button class="tab" data-view="track" onclick="go('track',this)">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3.5" y="4.5" width="17" height="16" rx="2"/><path d="M3.5 9h17M8 3v3M16 3v3"/><circle cx="12" cy="14" r="2"/></svg>
+    Track
+  </button>
+</nav>
+
+<!-- settings sheet -->
+<div class="modal" id="modal">
+  <div class="sheet">
+    <h2 class="serif" style="margin-bottom:10px">Your name</h2>
+    <p class="muted">For your greeting on the Today page.</p>
+    <input type="text" id="nameInput" placeholder="e.g. Maria" maxlength="20">
+    <div style="height:14px"></div>
+    <button class="btn" onclick="saveName()">Save</button>
+    <div style="height:10px"></div>
+    <button class="btn ghost" onclick="closeSettings()">Cancel</button>
+  </div>
+</div>
+
+<script>
+const LS = {
+  get:(k,d)=>{try{const v=localStorage.getItem('ginhawa.'+k);return v?JSON.parse(v):d;}catch(e){return d;}},
+  set:(k,v)=>{try{localStorage.setItem('ginhawa.'+k,JSON.stringify(v));}catch(e){}}
+};
+const todayKey = ()=> new Date().toISOString().slice(0,10);
+
+/* ---------- nav ---------- */
+function go(id,btn){
+  document.querySelectorAll('.view').forEach(v=>v.classList.toggle('active',v.id===id));
+  document.querySelectorAll('.tab').forEach(t=>t.classList.remove('active'));
+  btn.classList.add('active');
+  if(id!=='ease') stopBreath();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---------- chip selectors ---------- */
+function singleSelect(containerId){
+  const c=document.getElementById(containerId);
+  c.addEventListener('click',e=>{
+    const chip=e.target.closest('.chip');if(!chip)return;
+    c.querySelectorAll('.chip').forEach(x=>x.classList.remove('sel'));
+    chip.classList.add('sel');
+  });
+}
+function multiSelect(containerId){
+  const c=document.getElementById(containerId);
+  c.addEventListener('click',e=>{
+    const chip=e.target.closest('.chip');if(!chip)return;
+    chip.classList.toggle('sel');
+  });
+}
+function getSel(id){const c=document.getElementById(id).querySelector('.chip.sel');return c?c.dataset.v:'';}
+function getMulti(id){return [...document.getElementById(id).querySelectorAll('.chip.sel')].map(c=>c.dataset.v);}
+function clearSel(id){document.getElementById(id).querySelectorAll('.chip').forEach(c=>c.classList.remove('sel'));}
+
+['cramps','energy','mood','tPeriod','tCramps'].forEach(singleSelect);
+multiSelect('tSymp');
+
+/* ---------- today ---------- */
+const NOTES=[
+  "You are doing your best, and that is enough.",
+  "Small steps still move you forward, ako.",
+  "Rest is also taking care of yourself.",
+  "Be as gentle with yourself as you'd be with someone you love.",
+  "One glass of water, one short walk — that already counts.",
+  "Your body is working hard for you. Thank it today.",
+  "Progress isn't a straight line. Keep going softly."
+];
+const GOAL_LIST=[
+  "Drink water through the day",
+  "Move your body — even 10 min",
+  "Eat protein + gulay at a meal",
+  "Skip the sweet drink today"
+];
+
+function greetWord(){
+  const h=new Date().getHours();
+  if(h<11) return "Maayong buntag";
+  if(h<18) return "Maayong hapon";
+  return "Maayong gabii";
+}
+function renderToday(){
+  const name=LS.get('name','Trexsei');
+  document.getElementById('greet').textContent = greetWord()+(name?', '+name:'')+' 🌸';
+  document.getElementById('dateLbl').textContent = new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
+  document.getElementById('note').textContent = NOTES[new Date().getDate()%NOTES.length];
+
+  // goals (reset daily)
+  const gStore=LS.get('goals',{});
+  const day=todayKey();
+  const checked=gStore[day]||[];
+  const gc=document.getElementById('goals');gc.innerHTML='';
+  GOAL_LIST.forEach((g,i)=>{
+    const done=checked.includes(i);
+    const el=document.createElement('div');
+    el.className='goal'+(done?' done':'');
+    el.innerHTML='<div class="box"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"><path d="m5 12 5 5L20 6"/></svg></div><div class="gtxt">'+g+'</div>';
+    el.onclick=()=>{
+      const s=LS.get('goals',{});const arr=s[day]||[];
+      const idx=arr.indexOf(i);
+      if(idx>-1)arr.splice(idx,1);else arr.push(i);
+      s[day]=arr;LS.set('goals',s);renderToday();
+    };
+    gc.appendChild(el);
+  });
+
+  // restore today's checkin selection if exists
+  const ci=LS.get('checkins',[]).find(c=>c.date===day);
+  if(ci){
+    selectByValue('cramps',ci.cramps);
+    selectByValue('energy',ci.energy);
+    selectByValue('mood',ci.mood);
+  }
+  renderGarden();
+  renderForYou();
+}
+function selectByValue(id,val){
+  if(!val)return;
+  document.getElementById(id).querySelectorAll('.chip').forEach(c=>{
+    if(c.dataset.v===val)c.classList.add('sel');
+  });
+}
+
+function saveCheckin(){
+  const day=todayKey();
+  const entry={date:day,cramps:getSel('cramps'),energy:getSel('energy'),mood:getSel('mood')};
+  const arr=LS.get('checkins',[]).filter(c=>c.date!==day);
+  arr.push(entry);LS.set('checkins',arr);
+  renderGarden();
+  renderForYou();
+  flash('checkSaved','Saved 💛');
+}
+
+/* ---------- track ---------- */
+function saveEntry(){
+  const e={
+    id:Date.now(),
+    date:new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}),
+    period:getSel('tPeriod'),
+    cramps:getSel('tCramps'),
+    symptoms:getMulti('tSymp'),
+    note:document.getElementById('tNote').value.trim()
+  };
+  const arr=LS.get('entries',[]);arr.unshift(e);LS.set('entries',arr);
+  clearSel('tPeriod');clearSel('tCramps');clearSel('tSymp');
+  document.getElementById('tNote').value='';
+  flash('trackSaved','Saved 💛');
+  renderHistory();
+  renderForYou();
+}
+function deleteEntry(id){
+  LS.set('entries',LS.get('entries',[]).filter(e=>e.id!==id));
+  renderHistory();
+}
+function renderHistory(){
+  const arr=LS.get('entries',[]);
+  const h=document.getElementById('history');
+  if(!arr.length){h.innerHTML='<div class="empty">No entries yet.<br>Your saved days will show here.</div>';return;}
+  h.innerHTML='';
+  arr.slice(0,40).forEach(e=>{
+    const d=document.createElement('div');d.className='entry';
+    let pills='';
+    if(e.period)pills+='<span class="pill period">'+e.period+'</span>';
+    if(e.cramps)pills+='<span class="pill cramp">'+e.cramps+'</span>';
+    (e.symptoms||[]).forEach(s=>pills+='<span class="pill">'+s+'</span>');
+    d.innerHTML='<button class="del" onclick="deleteEntry('+e.id+')">remove</button>'+
+      '<span class="e-date">'+e.date+'</span>'+
+      (pills?'<div class="e-row">'+pills+'</div>':'')+
+      (e.note?'<div class="e-note">'+escapeHtml(e.note)+'</div>':'');
+    h.appendChild(d);
+  });
+}
+function escapeHtml(s){return s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
+
+function flash(id,msg){const el=document.getElementById(id);el.textContent=msg;setTimeout(()=>el.textContent='',2200);}
+
+/* ---------- settings ---------- */
+function openSettings(){document.getElementById('nameInput').value=LS.get('name','Trexsei');document.getElementById('modal').classList.add('show');}
+function closeSettings(){document.getElementById('modal').classList.remove('show');}
+function saveName(){LS.set('name',document.getElementById('nameInput').value.trim());closeSettings();renderToday();}
+document.getElementById('modal').addEventListener('click',e=>{if(e.target.id==='modal')closeSettings();});
+
+/* ---------- breathing ---------- */
+let breathOn=false,breathTimer=null;
+const stage=()=>document.getElementById('breathStage');
+const phases=[
+  {cls:'in',txt:'Breathe in',ms:4000},
+  {cls:'hold',txt:'Hold',ms:1500},
+  {cls:'out',txt:'Breathe out',ms:6000},
+  {cls:'hold',txt:'Rest',ms:1500}
+];
+let pi=0;
+function toggleBreath(){breathOn?stopBreath():startBreath();}
+function startBreath(){
+  breathOn=true;pi=0;
+  document.getElementById('breathBtn').textContent='Stop';
+  document.getElementById('breathCount').textContent='Let your shoulders drop...';
+  runPhase();
+}
+function runPhase(){
+  if(!breathOn)return;
+  const p=phases[pi];
+  const s=stage();
+  s.classList.remove('in','hold','out');
+  void s.offsetWidth;
+  s.classList.add(p.cls);
+  document.getElementById('breathTxt').textContent=p.txt;
+  breathTimer=setTimeout(()=>{pi=(pi+1)%phases.length;runPhase();},p.ms);
+}
+function stopBreath(){
+  breathOn=false;clearTimeout(breathTimer);
+  const s=stage();s.classList.remove('in','hold','out');
+  document.getElementById('breathTxt').textContent='Ready';
+  document.getElementById('breathCount').textContent='';
+  const b=document.getElementById('breathBtn');if(b)b.textContent='Start';
+}
+
+/* ---------- garden: hope + accountability ---------- */
+function uniqueCheckinDays(){return [...new Set(LS.get('checkins',[]).map(c=>c.date))];}
+function computeStreak(){
+  const days=new Set(uniqueCheckinDays());
+  if(!days.size)return 0;
+  const iso=x=>x.toISOString().slice(0,10);
+  let cursor=new Date();
+  if(!days.has(iso(cursor))){
+    cursor.setDate(cursor.getDate()-1);
+    if(!days.has(iso(cursor)))return 0;
+  }
+  let streak=0;
+  while(days.has(iso(cursor))){streak++;cursor.setDate(cursor.getDate()-1);}
+  return streak;
+}
+const PLANT_STAGES=[
+  {min:0,label:"Plant your first seed today"},
+  {min:1,label:"A little sprout 🌱"},
+  {min:3,label:"Growing steadily"},
+  {min:7,label:"Almost ready to bloom"},
+  {min:14,label:"In full bloom 🌸"}
+];
+function plantStage(total){let s=0;PLANT_STAGES.forEach((p,i)=>{if(total>=p.min)s=i;});return s;}
+function plantSVG(stage){
+  const SOIL='<ellipse cx="60" cy="140" rx="44" ry="8" fill="#E6D6C8"/><path d="M18 140c3-8 19-12 42-12s39 4 42 12Z" fill="#CDA07C"/>';
+  const LEAVES='<path d="M60 116c-10-3-17 3-18 11 10 1 17-3 18-11Z" fill="#82A479"/><path d="M60 108c10-3 17 3 18 11-10 1-17-3-18-11Z" fill="#94B58B"/>';
+  let inner='';
+  if(stage===0){
+    inner=SOIL+'<ellipse cx="60" cy="132" rx="5" ry="3.4" fill="#8A5C3B"/>';
+  }else if(stage===1){
+    inner=SOIL+'<path d="M60 134 V114" fill="none" stroke="#6F8A6A" stroke-width="4" stroke-linecap="round"/>'+
+      '<path d="M60 119c-8-3-14 2-15 9 8 1 14-3 15-9Z" fill="#82A479"/>'+
+      '<path d="M60 119c8-3 14 2 15 9-8 1-14-3-15-9Z" fill="#94B58B"/>';
+  }else if(stage===2){
+    inner=SOIL+'<path d="M60 134 V94" fill="none" stroke="#6F8A6A" stroke-width="4.5" stroke-linecap="round"/>'+
+      LEAVES+'<path d="M60 100c-8-3-14 2-15 9 8 1 14-3 15-9Z" fill="#82A479"/>';
+  }else if(stage===3){
+    inner=SOIL+'<path d="M60 134 V80" fill="none" stroke="#6F8A6A" stroke-width="4.5" stroke-linecap="round"/>'+
+      LEAVES+
+      '<path d="M51 82c5-4 13-4 18 0-5 5-13 5-18 0Z" fill="#6F8A6A"/>'+
+      '<path d="M60 58c-6 6-7 14 0 22 7-8 6-16 0-22Z" fill="#E8A0B0"/>'+
+      '<path d="M60 61c-3 4-3 10 0 16 3-6 3-12 0-16Z" fill="#F2BEC9"/>';
+  }else{
+    const petals=[0,60,120,180,240,300].map(a=>'<ellipse cx="0" cy="-16" rx="7.5" ry="14" fill="#EE9AAE" transform="rotate('+a+')"/>').join('');
+    inner=SOIL+'<path d="M60 134 V74" fill="none" stroke="#6F8A6A" stroke-width="4.5" stroke-linecap="round"/>'+
+      LEAVES+
+      '<g transform="translate(60 56)">'+petals+'<circle r="9" fill="#E0A93B"/><circle r="4.2" fill="#F4CF6B"/></g>';
+  }
+  return '<svg viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg">'+inner+'</svg>';
+}
+function renderGarden(){
+  const total=uniqueCheckinDays().length;
+  const streak=computeStreak();
+  const stage=plantStage(total);
+  document.getElementById('plant').innerHTML=plantSVG(stage);
+  document.getElementById('plantLabel').textContent=PLANT_STAGES[stage].label;
+  document.getElementById('streakNum').textContent=streak;
+  document.getElementById('totalNum').textContent=total;
+  const sm=document.getElementById('streakMsg');
+  if(streak===0&&total>0){sm.textContent="Your streak rested — that's okay. Check in today to begin again. 💛";}
+  else if(streak>=3){sm.textContent="Look how far you've come. Keep watering it. 🌿";}
+  else{sm.textContent='';}
+}
+
+/* ---------- for you: dietary suggestions & remedies ---------- */
+const SUG={
+  cramps:{title:"Soothe the cramps with food",body:"Brew warm luya (ginger) tea now, and lean on magnesium: monggo, malunggay, saba banana, and dark leafy gulay. Keep sugar and softdrinks low today — they feed the inflammation that worsens cramps. You've gotten through this before; be gentle, it will pass."},
+  period:{title:"Replenish your iron",body:"Your body is losing iron, so reach for dark leafy gulay (malunggay, kamote tops, kangkong), monggo, and a little egg or fish. Warm cooked meals sit better than cold ones right now. Keep water close. Rest is productive today too."},
+  cravings:{title:"Outsmart the cravings",body:"Cravings are a PCOS blood-sugar signal, not weakness. Eat protein first — an egg, tokwa, or a small handful of mani — then a kamote or saba if you still want more. Protein-first stops the crash that triggers the next craving. Learning your body is a real win."},
+  tired:{title:"Steady fuel for low energy",body:"Tiredness wants steady fuel, not sugar. Build a plate of monggo or egg + malunggay + a small scoop of brown rice or kamote. Skip the 3-in-1 coffee and sweet drinks — they lift you, then drop you harder. Even a short walk wakes the body up."},
+  bloating:{title:"Ease the bloating",body:"Go easy on salty and processed food today, sip calamansi or ginger water, and take a slow 10-minute walk after eating. Potassium-rich saba banana helps balance water retention. This passes faster than it feels."},
+  headache:{title:"A headache day",body:"Headaches often mean low water or a skipped meal. Drink a full glass of water now, eat something with protein, and cut the sweet drinks. Warm ginger tea can ease it too. Small fixes, real relief."},
+  acne:{title:"Calm your skin from the inside",body:"PCOS skin settles when blood sugar is steadier. Today: more gulay and water, a little less sugar and dairy, and protein at each meal. It's slow work, but consistency is what actually clears it. Keep going."},
+  mood:{title:"Be extra kind to yourself",body:"Mood dips ride your blood sugar with PCOS, so don't skip meals — protein + gulay + a little smart carb keeps you steadier. A few minutes of breathing (Ease tab) and a short walk lift the heaviness more than they seem to. This feeling is temporary."},
+  good:{title:"Ride the good day",body:"You're feeling good — the perfect day to lock in the habits. Protein + gulay at each meal, water over sweet drinks, and a walk if you can. Good days like this are how the harder ones become fewer. Proud of you."},
+  default:{title:"Two habits that help the most",body:"Tap a check-in above and I'll tailor today's suggestion. For now, the two changes that help PCOS most: choose water over sweet drinks, and add protein + gulay to your next meal. Start there — small and steady wins this."}
+};
+function todayFormatted(){return new Date().toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}
+function maxCramp(levels){
+  const rank={severe:4,bad:3,mild:2,none:1};let m=0,best='';
+  levels.forEach(l=>{const k=(l||'').toLowerCase();for(const key in rank){if(k.includes(key)&&rank[key]>m){m=rank[key];best=key;}}});
+  return best;
+}
+function todaySignals(){
+  const day=todayKey();
+  const ci=LS.get('checkins',[]).find(c=>c.date===day)||{};
+  const tf=todayFormatted();
+  const todayEntries=LS.get('entries',[]).filter(e=>e.date===tf);
+  let symptoms=new Set(),period='',crampLevels=[];
+  if(ci.cramps)crampLevels.push(ci.cramps);
+  todayEntries.forEach(e=>{
+    if(e.period)period=e.period;
+    if(e.cramps)crampLevels.push(e.cramps);
+    (e.symptoms||[]).forEach(s=>symptoms.add(s));
+  });
+  return {cramps:crampLevels,energy:ci.energy||'',mood:ci.mood||'',period,symptoms,hasCheckin:!!ci.cramps};
+}
+function buildSuggestion(){
+  const s=todaySignals();
+  if(!s.hasCheckin&&!s.period&&s.symptoms.size===0)return SUG.default;
+  const c=maxCramp(s.cramps);
+  if(c==='severe'||c==='bad')return SUG.cramps;
+  if(s.period)return SUG.period;
+  if(s.symptoms.has('Cravings'))return SUG.cravings;
+  if(s.symptoms.has('Tired')||s.energy==='Low')return SUG.tired;
+  if(s.symptoms.has('Bloating'))return SUG.bloating;
+  if(s.symptoms.has('Headache'))return SUG.headache;
+  if(s.symptoms.has('Acne'))return SUG.acne;
+  if(s.symptoms.has('Mood swings')||s.mood==='😢 Heavy'||s.mood==='😣 Sore')return SUG.mood;
+  if(s.energy==='Good'||c==='none')return SUG.good;
+  return SUG.default;
+}
+function renderForYou(){
+  const sug=buildSuggestion();
+  document.getElementById('fyTitle').textContent=sug.title;
+  document.getElementById('fyBody').textContent=sug.body;
+}
+
+/* ---------- init ---------- */
+renderToday();
+renderHistory();
+</script>
+</body>
+</html>
